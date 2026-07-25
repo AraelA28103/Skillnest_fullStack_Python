@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="araelanabalon@liceovvh.cl">
+    <title>Pokedex</title>
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/404.css') }}">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!-- Estilos de Bootstrap -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+</head>
+
+<body>
+    <div class="d-flex justify-content-center align-items-center vh-100 p-3">
+        <div class="card shadow card-custom-width">
+            <div class="card-header bg-white border-0">
+                <h1 class="card-title text-center text-primary fw-bold fs-1 mt-3">¡Oh no!</h1>
+                <h3 class="card-subtitle text-center fs-5 text-secondary">No pudimos encontrar información sobre "{{
+                    mensaje }}" en nuestra Pokédex</h3>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-center gap-2">
+                    <p class="text-danger fw-bold fs-5"><i class="bi bi-exclamation-triangle-fill fs-4"></i> Pokémon no
+                        encontrado</p>
+                </div>
+                <p class="card-text text-center text-secondary fs-5 mb-4">Tal vez este Pokémon aún no ha sido
+                    descubierto, o quizás has escrito mal su nombre.</p>
+                <div class="d-flex justify-content-center">
+                    <a href="/pokemon" class="btn btn-primary w-50 py-2 fs-5 fw-bold"><i
+                            class="bi bi-house-door-fill me-2"></i> Volver a la Pokédex</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

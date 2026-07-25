@@ -6,69 +6,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="araelanabalon@liceovvh.cl">
     <title>Pokedex</title>
+    <!-- Estilos personalizados -->
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
-    <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js"></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!-- Estilos de Bootstrap -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
 </head>
 
 <body>
     <header>
-        <nav>
-            <div class="nav-top">
-                <img src="{{ url_for('static', filename = 'img/pokeball.jfif') }}" alt="Logo">
-                <h1>Pokédex</h1>
+        <nav class="navbar d-flex flex-column align-items-center w-100 mb-5">
+            <div class="d-flex flex-row align-items-center justify-content-center mx-auto">
+                <img src="{{ url_for('static', filename = 'img/pokeball.jfif') }}" class="logo align-middle d-block"
+                    alt="Logo" style="width: 50px; height: 50px;">
+                <h1 class="m-0 align-self-center text-primary fw-bold">Pokédex</h1>
             </div>
-            <div class="nav-bottom">
-                <h2>Todos los Pokémon</h2>
-                <div class="nav-options">
-                    <button class="see-all-btn"><i class="fa-solid fa-list-ul"></i> Ver todos</button>
-                    <button class="see-5-btn"><i class="bi bi-funnel-fill"></i> Ver 5 primeros</button>
+            <div class="d-flex flex-column align-items-center">
+                <h2 class="m-4 fs-5">{{ titulo_vista }}</h2>
+                <div class="d-flex flex-row gap-2">
+                    <a class="btn border bg-primary text-white" href="/pokemon"><i class="bi bi-list-ul"></i> Ver todos</a>
+                    <a class="btn border bg-success text-white" href="/pokemon/cantidad/5"><i class="bi bi-funnel-fill"></i> Ver 5 primeros</a>
                 </div>
             </div>
         </nav>
     </header>
     <main>
-        <div class="container">
-            {% for pokemon in pokedex %}
-            <div class="poke-card">
-                <div class="poke-img">
-                    <img src="{{ url_for('static', filename='img/' + pokemon.imagen) }}"
-                        alt="Imagen de {{ pokemon.nombre }}">
-                </div>
-                <div class="poke-card-body">
-                    <div class="poke-name">
-                        <h2>#{{ pokemon.id }} - {{ pokemon.nombre }}</h2>
-                    </div>
-                    <div class="poke-types">
-                        {% for tipo_individual in pokemon.tipo.split('/') %}
-                        <span class="type"
-                            style="background-color: {{ colores.get(tipo_individual, '#888888') }}; color: {{ texto.get(tipo_individual, '#fff') }}">
-                            {{ tipo_individual }}
-                        </span>
-                        {% endfor %}
-                    </div>
-                    <div class="poke-power">
-                        <div class="power">
-                            <h4>Poder</h4>
-                            <div class="power-bar">
-                                <progress max="200" value="{{ pokemon.poder }}"></progress>
-                                <span>{{ pokemon.poder }}</span>
+        <div class="container-xl">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {% for pokemon in pokedex %}
+                <div class="col">
+                    <div class="card h-100">
+                        <!-- Imagen e ID del Pokemón -->
+                        <div class="card-img">
+                            <span class="position-absolute top-0 end-0 m-2 custom-badge bg-secondary">
+                                #{{ pokemon.id }}
+                            </span>
+                            <img src="{{ url_for('static', filename='img/' + pokemon.imagen) }}"
+                                class="poke-img mx-auto d-block m-4" alt="Imagen de {{ pokemon.nombre }}">
+                        </div>
+                        <div class="card-body">
+                            <!-- Nombre del Pokemón -->
+                            <div class="mb-2 d-flex justify-content-center">
+                                <h2 class="fs-4 m-0">{{ pokemon.nombre }}</h2>
+                            </div>
+                            <!-- Elementos del Pokemón -->
+                            <div class="m-3 d-flex justify-content-center gap-3">
+                                {% for tipo_individual in pokemon.tipo.split('/') %}
+                                <span class="custom-badge fw-bold"
+                                    style="background-color: {{ colores.get(tipo_individual, '#888888') }}; color: {{ texto.get(tipo_individual, '#fff') }}">
+                                    {{ tipo_individual }}
+                                </span>
+                                {% endfor %}
+                            </div>
+                            <!-- Poder del Pokemón -->
+                            <div>
+                                <h4 class="fs-6 text-secondary"><i class="bi bi-lightning-charge-fill"></i> Poder</h4>
+                                <div class="d-flex align-items-center gap-2">
+                                    <progress class="flex-grow-1 p-3 d-flex" max="200"
+                                        value="{{ pokemon.poder }}"></progress>
+                                    <span class="position-absolute start-50 small">{{ pokemon.poder }}</span>
+                                </div>
+                            </div>
+                            <!-- Altura y Peso del Pokemón -->
+                            <div class="d-flex justify-content-around my-4">
+                                <div class="d-flex flex-column align-items-center">
+                                    <h4 class="fs-6 m-0 text-secondary"><i class="bi bi-rulers"></i> Altura</h4>
+                                    <span class="fw-bold">{{ pokemon.altura }}</span>
+                                </div>
+                                <div class="d-flex flex-column align-items-center">
+                                    <h4 class="fs-6 m-0 text-secondary"><i class="bi bi-handbag-fill"></i> Peso</h4>
+                                    <span class="fw-bold">{{ pokemon.peso }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="poke-height-weight">
-                        <div class="height">
-                            <h4>Altura</h4>
-                            <span>{{ pokemon.altura }}</span>
-                        </div>
-                        <div class="weight">
-                            <h4>Peso</h4>
-                            <span>{{ pokemon.peso }}</span>
+                        <!-- Detalles del Pokemón -->
+                        <div class="card-footer bg-transparent">
+                            <button class="btn border-primary border-2 text-primary fw-bold w-100">Ver detalles</button>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-
-            {% endfor %}
         </div>
     </main>
 </body>

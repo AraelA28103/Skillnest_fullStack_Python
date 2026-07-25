@@ -30,15 +30,15 @@ colores_pokemon = {
 }
 
 texto_pokemon = {
-    "Eléctrico": "#000000",  # Negro para fondo amarillo claro
-    "Tierra": "#000000"     # Negro para fondo arena claro
+    "Eléctrico": "#000000",
+    "Tierra": "#000000"
 }
 
 # Ruta para mostrar todos los Pokémon
 @app.route("/")
 @app.route("/pokemon")
 def mostrar_pokemon():
-    return render_template("pokemon.html", pokedex = pokedex, colores = colores_pokemon, texto = texto_pokemon)
+    return render_template("pokemon.html", pokedex = pokedex, colores = colores_pokemon, texto = texto_pokemon, titulo_vista = "Todos los Pokémon")
 
 # Ruta para mostrar un Pokémon por nombre
 @app.route("/pokemon/<string:nombre>")
@@ -46,8 +46,9 @@ def mostrar_pokemon_nombre(nombre):
     for pokemon in pokedex:
         if pokemon["nombre"].lower() == nombre.lower():
             pokemon_solicitado = pokemon
-            return render_template("pokemon.html", pokemon = [pokemon_solicitado])
-    return abort(404)
+            texto_titulo = f"Pokémon: {pokemon_solicitado['nombre']}"
+            return render_template("pokemon.html", pokedex = [pokemon_solicitado], colores = colores_pokemon, texto = texto_pokemon, titulo_vista = texto_titulo)
+    return abort(404, description=nombre)
 
 # Ruta para mostrar un Pokémon por número en la Pokédex
 @app.route("/pokemon/<int:id_pokemon>")
@@ -55,19 +56,24 @@ def mostrar_pokemon_num(id_pokemon):
     for pokemon in pokedex:
         if pokemon["id"] == id_pokemon:
             pokemon_solicitado = pokemon
-            return render_template("pokemon.html", pokemon = [pokemon_solicitado])
-    return abort(404)
+            texto_titulo = f"Pokémon: {pokemon_solicitado['nombre']}"
+            return render_template("pokemon.html", pokedex = [pokemon_solicitado], colores = colores_pokemon, texto = texto_pokemon, titulo_vista = texto_titulo)
+    return abort(404, description=str(id_pokemon))
 
 # Ruta para mostrar una cantidad específica de Pokémon
 @app.route("/pokemon/cantidad/<int:cantidad>")
 def mostrar_cantidad_pokemon(cantidad):
     if 1 <= cantidad <= len(pokedex):
-        return render_template("pokemon.html", pokemon = pokedex[:cantidad])
+        texto_titulo = f"Primeros {cantidad} Pokémon registrados"
+        return render_template("pokemon.html", pokedex = pokedex[:cantidad], colores = colores_pokemon, texto = texto_pokemon, titulo_vista = texto_titulo)
+    return abort(404, description=str(cantidad))
 
 # Error cuando no se encuentra un Pokémon
 @app.errorhandler(404)
 def pokemon_no_encontrado(mensaje: str):
    """Función simple para renderizar la página 404 con un mensaje."""
+   if not isinstance(mensaje, str):
+       mensaje = getattr(mensaje, 'description', 'recurso solicitado')
    return render_template("404.html", mensaje=mensaje)
 
 if __name__ == "__main__":
