@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="araelanabalon@liceovvh.cl">
+    <title>Videojuegos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="container text-center">
+            <h1>Lista de Videojuegos</h1>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <table class="table table-striped table-hover table-bordered align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Plataforma</th>
+                        <th scope="col">Año de lanzamiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for videojuego in videojuegos %}
+                    <tr>
+                        <td class="fw-bold">{{ videojuego.nombre }}</td>
+                        <td><span class="badge bg-secondary">{{ videojuego.plataforma }}</span></td>
+                        <td>{{ videojuego.publicacion }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>
