@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="araelanabalon@liceovvh.cl">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css') }}">
+</head>
+
+<body>
+    <main>
+        <section class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Formulario de Registro</h1>
+                </div>
+                <div class="card-body">
+                    <form action="/index.html" method="POST">
+                        <label for="nombre" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre"
+                            placeholder="Ingrese su nombre">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                            placeholder="Ingrese un correo electrónico">
+                        <label for="contrasena" class="form-label">Contraseña:</label>
+                        <input type="password" class="form-control" id="contrasena" name="contrasena"
+                            placeholder="Ingrese una contraseña">
+                    </form>
+                </div>
+                <div class="card-footer pt-3">
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename = 'js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
+</body>
+
+</html>
