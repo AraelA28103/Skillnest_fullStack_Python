@@ -8,6 +8,8 @@
     <title>Visitas</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 
 <body class="min-vh-100 d-flex align-items-center py-5" style="background: linear-gradient(135deg, #eef4ff, #f8f9fa);">
@@ -65,7 +67,8 @@
             <!-- Reinicios -->
             <div class="p-3 bg-warning bg-opacity-10 text-warning-emphasis mb-4 text-center"
                 style="border-radius: 10px;">
-                <i class="bi bi-arrow-repeat"></i> Historial de restablecimientos: <strong class="fs-5">{{ reinicios }}</strong>
+                <i class="bi bi-arrow-repeat"></i> Historial de restablecimientos: <strong class="fs-5">{{ reinicios
+                    }}</strong>
                 veces.
             </div>
 
