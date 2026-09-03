@@ -7,15 +7,15 @@ app.secret_key = "clave-secreta-visitas"
 
 @app.route("/")
 def index():
-    # Incrementa el contador de visitas o lo inicializa si es la primera vez
     if "visitas" in session:
         session["visitas"] += 1
     else:
         session["visitas"] = 1
 
-    # Inicializa el contador de reinicios si no existe
     if "reinicios" not in session:
         session["reinicios"] = 0
+
+    session.modified = True
 
     return render_template(
         "index.html",
@@ -28,7 +28,7 @@ def incrementar_doble():
     if "visitas" not in session:
         session["visitas"] = 0
     
-    session["visitas"] += 2
+    session["visitas"] += 1
     return redirect(url_for("index"))
 
 @app.route("/restablecer_contador")
