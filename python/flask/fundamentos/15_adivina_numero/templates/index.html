@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina el Número</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+    <div class="contenedor">
+        <h1>Adivina el Número Secreto</h1>
+
+        <div class="tarjeta-estado">
+            <p class="mensaje {{ resultado }}">{{ mensaje }}</p>
+            <p class="intentos">Intentos realizados: <strong>{{ intentos }}</strong></p>
+        </div>
+
+        {% if resultado != 'correcto' %}
+        <div class="botones-rapidos">
+            {% for i in range(1, 11) %}
+            <form action="{{ url_for('adivinar') }}" method="POST" style="display: inline;">
+                <input type="hidden" name="numero" value="{{ i }}">
+                <button type="submit" class="boton-numero">{{ i }}</button>
+            </form>
+            {% endfor %}
+        </div>
+
+        <form action="{{ url_for('adivinar') }}" method="POST" class="formulario-manual">
+            <label for="numero">O ingresa un número manualmente:</label><br>
+            <input type="number" id="numero" name="numero" min="1" max="10" required>
+            <button type="submit" class="boton-enviar">Adivinar</button>
+        </form>
+        {% endif %}
+
+        <div class="controles">
+            <a href="{{ url_for('reiniciar') }}" class="boton-reiniciar">Reiniciar Juego</a>
+        </div>
+
+        <div class="reglas">
+            <h3>Reglas del juego</h3>
+            <ul>
+                <li>El sistema elige un número del 1 al 10 de forma aleatoria.</li>
+                <li>Debes descubrir el número utilizando la menor cantidad de intentos posible.</li>
+                <li>El juego te indicará si tu número es mayor, menor o igual al secreto.</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>

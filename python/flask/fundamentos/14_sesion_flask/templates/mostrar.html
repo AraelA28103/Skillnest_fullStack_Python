@@ -9,17 +9,13 @@
 
 <body>
     <h1>Usuario procesado correctamente</h1>
-    <p>
-        La información fue recibida por el servidor.
-    </p>
-    <p>
-        El servidor procesó la solicitud
-        y posteriormente realizó una redirección.
-    </p>
+    <p>La información fue recuperada directamente desde la sesión.</p>
+    <ul>
+        <li>Nombre: {{ session['nombre_usuario'] }}</li>
+        <li>Email: {{ session['email_usuario'] }}</li>
+    </ul>
     <hr>
-    <a href="{{ url_for('index') }}">
-        Volver al formulario
-    </a>
+    <a href="/">Volver al formulario</a>
 </body>
 
 </html>
