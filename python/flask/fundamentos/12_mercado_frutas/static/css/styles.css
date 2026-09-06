@@ -1,0 +1,59 @@
+:root {
+    --green-primary: #4caf50;
+    --hero-bg: #8e8e93;
+    --border-color: #e5e5ea;
+}
+
+.navbar-green {
+    background-color: var(--green-primary);
+}
+
+.nav-link-custom {
+    cursor: pointer;
+}
+
+.hero-section {
+    background-color: var(--hero-bg);
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.hero-subtitle {
+    color: var(--border-color);
+}
+
+.fruta-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.fruta-img-container {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.fruta-img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.price-text {
+    color: var(--green-primary);
+    font-weight: bold;
+}
+
+.fruta-desc {
+    height: 40px;
+    overflow: hidden;
+}
+
+.gradient-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0) 100%);
+}

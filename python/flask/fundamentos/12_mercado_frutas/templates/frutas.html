@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo - Mercado de Frutas</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+
+<body class="bg-light">
+
+    <header class="navbar-green py-2 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="/" class="text-white text-decoration-none fw-bold d-flex align-items-center">
+                <span class="me-2"><i class="bi bi-apple"></i></span> Mercado de Frutas
+            </a>
+            <div class="text-white small">
+                <a href="/" class="text-white-50 text-decoration-none me-3 nav-link-custom">Inicio</a>
+                <a href="/frutas" class="text-white active text-decoration-none nav-link-custom">Catálogo</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="display-5 fw-bold mb-2">Nuestras Frutas</h1>
+            <p class="lead fs-6 hero-subtitle">Descubre nuestra variedad de frutas frescas disponibles</p>
+        </div>
+    </section>
+
+    <main class="container my-5">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+            {% for fruta in frutas %}
+            <div class="col">
+                <div class="card h-100 shadow border-0 position-relative overflow-hidden rounded-3 bg-white">
+                    <div class="p-4 d-flex align-items-center justify-content-center" style="aspect-ratio: 1 / 1;">
+                        <img src="{{ url_for('static', filename='img/' + fruta.imagen) }}" alt="{{ fruta.nombre }}"
+                            class="img-fluid mh-100 mw-100 object-fit-contain">
+                    </div>
+                    <div class="position-absolute bottom-0 start-0 w-100 p-4 gradient-overlay text-white">
+                        <h6 class="fw-bold mb-0 text-white">{{ fruta.nombre }}</h6>
+                        <span class="small text-warning">${{ "%.1f"|format(fruta.precio) }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center my-5">
+            <a href="/" class="btn btn-primary px-4 py-2 fw-semibold shadow">
+                <i class="bi bi-cart-fill me-2"></i> Hacer un pedido
+            </a>
+        </div>
+
+        <section class="mt-5 pt-4">
+            <h3 class="text-center fw-bold mb-5 text-dark">¿Por qué elegirnos?</h3>
+            <div class="row g-4">
+
+                <div class="col-md-4 text-center">
+                    <div class="card h-100 shadow border-0 p-4 bg-white rounded-3">
+                        <div class="text-success mb-3 fs-1">
+                            <i class="bi bi-flower1"></i>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-2">100% Orgánico</h5>
+                        <p class="text-muted small mb-0">Todas nuestras frutas son cultivadas sin pesticidas ni químicos
+                            dañinos.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    <div class="card h-100 shadow border-0 p-4 bg-white rounded-3">
+                        <div class="text-success mb-3 fs-1">
+                            <i class="bi bi-truck"></i>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-2">Entrega Rápida</h5>
+                        <p class="text-muted small mb-0">Entregamos en menos de 48 horas para asegurar la máxima
+                            frescura.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    <div class="card h-100 shadow border-0 p-4 bg-white rounded-3">
+                        <div class="text-success mb-3 fs-1">
+                            <i class="bi bi-award"></i>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-2">Calidad Garantizada</h5>
+                        <p class="text-muted small mb-0">Si no estás satisfecho con nuestros productos, te devolvemos tu
+                            dinero.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>
